@@ -5,7 +5,7 @@ sudo -u $USER ssh-keygen -t rsa -C $AZURE_EMAIL -f $HOME/.ssh/id_rsa -N "" -q
 
 echo "# NVM..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | sudo -u $USER bash
-source $HOME/.bashrc
+source $HOME/.nvm/nvm.sh
 nvm install 14
 
 echo "# Docker..."
