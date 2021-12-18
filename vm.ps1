@@ -7,7 +7,10 @@ if ($vm -eq $null) {
 echo "# Config..."
 $config = $args[1]
 if ($config -eq $null) {
-  $config = "vm.yaml"
+  $config = (curl "https://raw.githubusercontent.com/j0rtiz/multipass-cloud-init/main/vm.yaml").Content
+  ($Env:AZURE | ConvertFrom-Json).psobject.Properties | foreach {
+    $config = $config -replace "{$($_.Name)}", $_.Value
+  }
 }
 
 echo "# Delete..."
