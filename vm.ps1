@@ -11,6 +11,8 @@ if ($config -eq $null) {
   ($Env:AZURE | ConvertFrom-Json).psobject.Properties | foreach {
     $config = $config -replace "{$($_.Name)}", $_.Value
   }
+  $config | Out-File .\vm.yaml
+  $config = "vm.yaml"
 }
 
 echo "# Delete..."
