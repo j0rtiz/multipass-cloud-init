@@ -1,0 +1,30 @@
+#cloud-config
+
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDgTSrMsWiRqcq7SjM7y3tjik1lZxINoyWN9JkY4EH2NSH5VnXJ+6j48TmzG0t27SEGelXPk1RpqwRuveHWkvzBwRMkvNwL9j3UFoKlTw8q4n/ynG12g8uKiCJi/P9M2Zbbc67u96Xefe8a5Yebtk8JSsOqfzE9m6BXkVEBeZpNCFuzx3nIBOKpBmPPXT3jC7dwV1gBx0lfgccSkkxVgkOTCyPO8j7nbCWlIJo9rUVU2GElyflN0vsdXq0bebAM8guz+q4Jwm5MVjqhproR/l/P28y3yTmlg/5+pMo++q/LPQ6ngvmNG5zUqv0wFjP/Yeq5SXTGG29kD2l7tKMwcF/jvgwqBUppRSWsBfkWQL3c8k1kfy466WUBuZk+CzWo0V+fmwXA/cJAHnLig0WhMJvVoUQP95zeB69uiiXmsI4pce4EUjr3Jd6qQXpwmlOeM5T1jxL9UrWz0ruVnVkJmtMpRTz/I6XwpylpTTQRpEwWrtAvn/BHjDiR97vYYvSSXwE= {AZURE_EMAIL}
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+packages:
+  - net-tools
+  - uidmap
+  - curl
+  - git
+write_files:
+  - path: /etc/environment
+    content: |
+      USER={USER}
+      HOME={HOME}
+      WORKSPACE={WORKSPACE}
+      NVM_VERSION={NVM_VERSION}
+      NODE_VERSION={NODE_VERSION}
+      DOCKER_COMPOSE_VERSION={DOCKER_COMPOSE_VERSION}
+      DOCKER_COMPOSE_COMMAND_COMPLETION_VERSION={DOCKER_COMPOSE_COMMAND_COMPLETION_VERSION}
+      AZURE_URL={AZURE_URL}
+      AZURE_USER={AZURE_USER}
+      AZURE_EMAIL={AZURE_EMAIL}
+      AZURE_SERVER={AZURE_SERVER}
+      AZURE_PASSWORD={AZURE_PASSWORD}
+    append: true
+runcmd:
+  - curl https://raw.githubusercontent.com/j0rtiz/multipass-cloud-init/main/vm.sh | sudo -u {USER} bash
