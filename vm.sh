@@ -26,7 +26,13 @@ echo "# Config..."
 sudo -u $USER mkdir $HOME/$WORKSPACE
 sudo -u $USER touch $HOME/.sudo_as_admin_successful
 sudo -u $USER echo -e "Host $AZURE_SERVER\n   StrictHostKeyChecking no" > $HOME/.ssh/config
-sudo -u $USER echo -e "\nsudo ifconfig eth0 mtu 1350\ncd $HOME/$WORKSPACE" >> $HOME/.bashrc
+sudo -u $USER echo -e "\ngreen=\`tput setaf 2\`" >> $HOME/.bashrc
+sudo -u $USER echo -e "blue=\`tput setaf 4\`" >> $HOME/.bashrc
+sudo -u $USER echo -e "reset=\`tput sgr0\`" >> $HOME/.bashrc
+sudo -u $USER echo -e "\nsudo ifconfig eth0 mtu 1350" >> $HOME/.bashrc
+sudo -u $USER echo -e "cd $HOME/$WORKSPACE && clear" >> $HOME/.bashrc
+sudo -u $USER echo -e "echo \"\${green}Chave Pública: \${blue}\$(cat $HOME/.ssh/id_rsa.pub)\${reset}\"" >> $HOME/.bashrc
+sudo -u $USER echo -e "echo \"\${green}Swagger: \${blue}https://\$(hostname -I | awk '{print \$1}'):3000/api/docs/\${reset}\"" >> $HOME/.bashrc
 sudo -u $USER echo -e "registry=https://$AZURE_URL/registry/\n\nalways-auth=true\n\n; begin auth token\n//$AZURE_URL/registry/:username=$AZURE_USER\n//$AZURE_URL/registry/:_password=$AZURE_PASSWORD\n//$AZURE_URL/registry/:email=$AZURE_EMAIL\n//$AZURE_URL/:username=$AZURE_USER\n//$AZURE_URL/:_password=$AZURE_PASSWORD\n//$AZURE_URL/:email=$AZURE_EMAIL\n; end auth token" > $HOME/.npmrc
 
 echo "# Fim!"
