@@ -23,6 +23,7 @@ sudo curl -L https://raw.githubusercontent.com/docker/compose/$DOCKER_COMPOSE_CO
 source $HOME/.bashrc
 
 echo "# Config..."
+echo -e "fs.inotify.max_user_watches=524288" | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 sudo -u $USER mkdir $HOME/$WORKSPACE
 sudo -u $USER touch $HOME/.sudo_as_admin_successful
 sudo -u $USER echo -e "Host $AZURE_SERVER\n   StrictHostKeyChecking no" > $HOME/.ssh/config
